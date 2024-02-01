@@ -7,8 +7,8 @@ class Solution:
         ans[1] = end
         return ans
     
-    @staticmethod
-    def search(nums, target, findFirstIndex):
+    
+    def search(self, nums, target, findFirstIndex):
         ans = -1
         start = 0
         end = len(nums) - 1
