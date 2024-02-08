@@ -12,9 +12,9 @@ class Solution:
                 swap(nums, i, correct)
         
         result=[]
-        for i in range(len(nums)):
-            if nums[i] != i+1:
-                result.append(i+1)
+        for j in range(len(nums)):
+            if nums[j] != j+1:
+                result.append(j+1)
         return result 
             
     
