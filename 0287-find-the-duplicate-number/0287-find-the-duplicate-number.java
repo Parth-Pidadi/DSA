@@ -12,7 +12,7 @@ class Solution {
             }
             
         }
-        int ans = 0;
+        
         for (int a=0; a < nums.length; a++){
             if (nums[a] != a+1){
                return nums[a];
