@@ -1,43 +1,32 @@
 class Solution {
     public int thirdMax(int[] nums) {
-        insertion(nums);
-        int elemCounted =1;
-        int prevElem = nums[nums.length-1];
-        for (int i= nums.length-2; i>=0; i--){
-            if(nums[i] != prevElem){
-                elemCounted += 1;
-                prevElem = nums[i];
-                
-            }
-            if (elemCounted == 3){
-                return nums[i];
-            }
-            
-            
-                
-            
-            
-        }
-        return nums[nums.length-1];
+        // Sort the array in non-increasing order.
+        Arrays.sort(nums);
         
-               
-    }
-    public void insertion(int[] nums){
-        for( int i= 0; i < nums.length-1; i++){
-            for( int j = i+1; j>0; j-- ){
-                if(nums[j] < nums[j-1]){
-                    swap(nums, j, j-1);
-                }else{
-                    break;
-                }
+        // Reverse array to make it non-increasing.
+        for (int index = 0; index < nums.length / 2; ++index) {
+            int temp = nums[index];
+            nums[index] = nums[nums.length - 1 - index];
+            nums[nums.length - 1 - index] = temp;
+        }
+        
+        int elemCounted = 1;
+        int prevElem = nums[0];
+        
+        for (int index = 1; index < nums.length; ++index) {
+            // Current element is different from previous.
+            if (nums[index] != prevElem) {
+                elemCounted += 1;
+                prevElem = nums[index];
+            }
+            
+            // If we have counted 3 numbers then return current number.
+            if (elemCounted == 3) {
+                return nums[index];
             }
         }
-    }
-    
-    
-    public void swap(int[] arr, int first, int last ){
-        int temp = arr[first];
-        arr[first] = arr[last];
-        arr[last] = temp;
+        
+        // We never counted 3 distinct numbers, return largest number.
+        return nums[0];
     }
 }
