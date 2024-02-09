@@ -1,42 +1,43 @@
 class Solution {
     public int thirdMax(int[] nums) {
-        Pair<Integer, Boolean> firstMax = new Pair<Integer, Boolean>(-1, false);
-        Pair<Integer, Boolean> secondMax = new Pair<Integer, Boolean>(-1, false);
-        Pair<Integer, Boolean> thirdMax = new Pair<Integer, Boolean>(-1, false);
+        // Three variables to store maxiumum three numbers till now.
+        long firstMax = Long.MIN_VALUE;
+        long secondMax = Long.MIN_VALUE;
+        long thirdMax = Long.MIN_VALUE;
         
         for (int num : nums) {
-            // If current number is already stored, skip it.
-            if ((firstMax.getValue() && firstMax.getKey() == num) || 
-                (secondMax.getValue() && secondMax.getKey() == num) || 
-                (thirdMax.getValue() && thirdMax.getKey() == num)) {
+            // This number is already used once, thus we skip it.
+            if (firstMax == num || secondMax == num || thirdMax == num) {
                 continue;
             }
             
-            // If we never stored any variable in firstMax
-            // or curr num is bigger than firstMax, then curr num is the biggest number.
-            if (!firstMax.getValue() || firstMax.getKey() <= num) {
+            // If current number is greater than first maximum,
+            // It means that this is the greatest number and first maximum and second max
+            // will become the next two greater numbers.
+            if (firstMax <= num) {
                 thirdMax = secondMax;
                 secondMax = firstMax;
-                firstMax = new Pair<Integer, Boolean>(num, true);
+                firstMax = num;
             }
-            // If we never stored any variable in secondMax
-            // or curr num is bigger than secondMax, then curr num is 2nd biggest number.
-            else if (!secondMax.getValue() || secondMax.getKey() <= num) {
+            // When current number is greater than second maximum,
+            // it means that this is the second greatest number.
+            else if (secondMax <= num) {
                 thirdMax = secondMax;
-                secondMax = new Pair<Integer, Boolean>(num, true);
+                secondMax = num;
             }
-            // If we never stored any variable in thirdMax
-            // or curr num is bigger than thirdMax, then curr num is 3rd biggest number.
-            else if (!thirdMax.getValue() || thirdMax.getKey() <= num) {
-                thirdMax = new Pair<Integer, Boolean>(num, true);
+            // It is the third greatest number.
+            else if (thirdMax <= num) {
+                thirdMax = num;
             }
         }
         
         // If third max was never updated, it means we don't have 3 distinct numbers.
-        if (!thirdMax.getValue()) {
-            return firstMax.getKey();
+        if (thirdMax == Long.MIN_VALUE) {
+            int ans = (int) firstMax;
+            return ans;
         }
         
-        return thirdMax.getKey();
+        int ans = (int) thirdMax;
+        return ans;
     }
 }
