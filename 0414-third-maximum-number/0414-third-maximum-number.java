@@ -1,37 +1,42 @@
 class Solution {
     public int thirdMax(int[] nums) {
-        // Sorted set to keep elements in sorted order.
-        TreeSet<Integer> sortedNums = new TreeSet<Integer>();
+        Pair<Integer, Boolean> firstMax = new Pair<Integer, Boolean>(-1, false);
+        Pair<Integer, Boolean> secondMax = new Pair<Integer, Boolean>(-1, false);
+        Pair<Integer, Boolean> thirdMax = new Pair<Integer, Boolean>(-1, false);
         
-        // Iterate on all elements of 'nums' array.
         for (int num : nums) {
-            // Do not insert same element again.
-            if (sortedNums.contains(num)) {
+            // If current number is already stored, skip it.
+            if ((firstMax.getValue() && firstMax.getKey() == num) || 
+                (secondMax.getValue() && secondMax.getKey() == num) || 
+                (thirdMax.getValue() && thirdMax.getKey() == num)) {
                 continue;
             }
             
-            // If sorted set has 3 elements.
-            if (sortedNums.size() == 3) {
-                // And the smallest element is smaller than current element.
-                if (sortedNums.first() < num) {
-                    // Then remove the smallest element and push the current element.
-                    sortedNums.pollFirst();
-                    sortedNums.add(num);
-                }
-                
-            } 
-            // Otherwise push the current element of nums array.
-            else {
-                sortedNums.add(num);
+            // If we never stored any variable in firstMax
+            // or curr num is bigger than firstMax, then curr num is the biggest number.
+            if (!firstMax.getValue() || firstMax.getKey() <= num) {
+                thirdMax = secondMax;
+                secondMax = firstMax;
+                firstMax = new Pair<Integer, Boolean>(num, true);
+            }
+            // If we never stored any variable in secondMax
+            // or curr num is bigger than secondMax, then curr num is 2nd biggest number.
+            else if (!secondMax.getValue() || secondMax.getKey() <= num) {
+                thirdMax = secondMax;
+                secondMax = new Pair<Integer, Boolean>(num, true);
+            }
+            // If we never stored any variable in thirdMax
+            // or curr num is bigger than thirdMax, then curr num is 3rd biggest number.
+            else if (!thirdMax.getValue() || thirdMax.getKey() <= num) {
+                thirdMax = new Pair<Integer, Boolean>(num, true);
             }
         }
         
-        // If sorted set has three elements return the smallest among those 3.
-        if (sortedNums.size() == 3) {
-            return sortedNums.first();
+        // If third max was never updated, it means we don't have 3 distinct numbers.
+        if (!thirdMax.getValue()) {
+            return firstMax.getKey();
         }
         
-        // Otherwise return the biggest element of nums array.
-        return sortedNums.last();
+        return thirdMax.getKey();
     }
 }
