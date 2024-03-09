@@ -25,6 +25,6 @@ class Solution {
             j++;
             k++;
         }
-        System.arraycopy(mix, 0, nums1, 0, m+n);;
+        System.arraycopy(mix, 0, nums1, 0, mix.length);;
     }
 }
