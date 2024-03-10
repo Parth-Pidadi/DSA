@@ -5,13 +5,12 @@ class Solution {
         
         while(start<end){
             char temp = s[start];
-            s[start] = s[end];
-            s[end] = temp;
-            start ++;
-            end-- ;
+            s[start++] =s[end];
+            s[end--]=temp;
+            
             
         }
-        System.out.println(s);
+        
             
     }
 }
