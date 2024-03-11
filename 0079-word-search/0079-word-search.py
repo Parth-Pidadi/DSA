@@ -19,6 +19,7 @@ class Solution:
         for i in range(ROWS):
             for j in range(COLS):
                 
-                if dfs(i,j,0): return True
+                if dfs(i,j,0):
+                    return True
         return False
         
