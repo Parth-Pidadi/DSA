@@ -7,7 +7,7 @@ class Solution {
         //     return false;
         // }
         // System.out.println((Math.log(n))/(Math.log(2)));
-        if(n<1){
+        if(n<=0){
             return false;
         }
         if (n==1){
