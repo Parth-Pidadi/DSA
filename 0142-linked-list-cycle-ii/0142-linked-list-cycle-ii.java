@@ -12,7 +12,7 @@
 public class Solution {
     public ListNode detectCycle(ListNode head) {
         
-        int length  = 0;
+        // int length  = 0;
         ListNode fast = head;
         ListNode slow = head;
         while(fast != null && fast.next != null)
