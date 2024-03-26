@@ -13,10 +13,24 @@ class Solution {
         if(head == null || head.next == null ){
             return head;
         }
-        ListNode last = reverseList(head.next);
+//         ListNode last = reverseList(head.next);
         
-        head.next.next = head;
-        head.next = null;
-        return last;
+//         head.next.next = head;
+//         head.next = null;
+//         return last;
+        ListNode prev = null;
+        ListNode curr = head;
+        ListNode nxt = curr.next;
+        while(curr != null){
+            curr.next = prev;
+            prev = curr;
+            curr = nxt;
+            if ( nxt != null){
+                nxt = nxt.next;
+                
+            }
+            
+        }
+        return prev;
     }
 }
