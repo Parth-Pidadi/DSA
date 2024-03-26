@@ -36,16 +36,18 @@ class Solution {
     public ListNode reverse(ListNode head){
         ListNode prev = null;
         ListNode curr = head;
-        ListNode nxt = curr.next;
+        // ListNode nxt = curr.next;
         
         while (curr!= null){
+            ListNode nxt = curr.next;
             curr.next = prev;
             prev = curr;
             curr = nxt;
-            if ( nxt!=null){
-                nxt = nxt.next;
+            
+//             if ( nxt!=null){
+//                 nxt = nxt.next;
                 
-            }
+//             }
             
             
             
