@@ -14,7 +14,7 @@ class Solution:
         queue = []
         queue.append(root)
         while(queue):
-            sum = 0.0
+            sum = 0
             size = len(queue)
             
             for i in range(size):
